@@ -28,8 +28,8 @@ public class UserRoleRepository(OCSS_DbContext context) : IUserRoleRepository
         throw new NotImplementedException();
     }
 
-    public Task SaveChangesAsync()
+    public async Task SaveChangesAsync()
     {
-        throw new NotImplementedException();
+        await _context.SaveChangesAsync();
     }
 }

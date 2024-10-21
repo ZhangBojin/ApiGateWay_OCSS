@@ -1,5 +1,7 @@
-﻿using ApiGateWay_OCSS.Domain.IRepositories;
+﻿using ApiGateWay_OCSS.Domain.Entities;
+using ApiGateWay_OCSS.Domain.IRepositories;
 using ApiGateWay_OCSS.Infrastructure.EfCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiGateWay_OCSS.Infrastructure.Repositories
 {
@@ -8,9 +10,15 @@ namespace ApiGateWay_OCSS.Infrastructure.Repositories
         private readonly OCSS_DbContext _context = context;
 
 
-        public Task AddAsync()
+        public async Task<bool> AddAsync(string role)
         {
-            throw new NotImplementedException();
+            if (await _context.Roles.FirstOrDefaultAsync(u => u!.RoleName == role) != null) return false;
+            await _context.AddAsync(new Roles()
+            {
+                RoleName = role,
+                CreationTime = DateTime.Now
+            });
+            return true;
         }
 
         public Task DeleteAsync()
@@ -28,9 +36,10 @@ namespace ApiGateWay_OCSS.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task SaveChangesAsync()
+        public async Task SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
         }
+
     }
 }

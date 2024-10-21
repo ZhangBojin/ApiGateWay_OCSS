@@ -2,7 +2,7 @@
 {
     public interface IRoleRepository
     {
-        Task AddAsync();
+        Task<bool> AddAsync(string role);
         Task DeleteAsync();
         Task UpdateAsync();
         Task SelectAllAsync();
