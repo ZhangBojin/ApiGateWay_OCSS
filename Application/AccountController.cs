@@ -1,7 +1,7 @@
 ﻿using ApiGateWay_OCSS.Domain.Entities;
 using ApiGateWay_OCSS.Domain.IRepositories;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ApiGateWay_OCSS.Application
 {
@@ -16,6 +16,9 @@ namespace ApiGateWay_OCSS.Application
         {
             try
             {
+                const string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+                if (!Regex.IsMatch(accountDto.Email, pattern)) throw new Exception("不是有效邮箱！");
+
                 if (!await _userRepository.AddAsync(new Users()
                     {
                         Name = accountDto.Name,
@@ -49,12 +52,14 @@ namespace ApiGateWay_OCSS.Application
             }
         }
 
+        #region test
         //[Authorize(Roles = "管理员")]
         //[HttpGet]
         //public IActionResult cs()
         //{
         //    return Ok();
         //}
+        #endregion
     }
 
     public class AccountDto
