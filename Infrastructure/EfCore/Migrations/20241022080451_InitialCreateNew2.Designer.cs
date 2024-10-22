@@ -4,6 +4,7 @@ using ApiGateWay_OCSS.Infrastructure.EfCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiGateWay_OCSS.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(OCSS_DbContext))]
-    partial class OCSS_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20241022080451_InitialCreateNew2")]
+    partial class InitialCreateNew2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
