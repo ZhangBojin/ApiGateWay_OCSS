@@ -19,6 +19,11 @@ namespace ApiGateWay_OCSS.Infrastructure.Repositories
             return true;
         }
 
+        public async Task<Users?> GetByEmail(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u!.Email == email);
+        }
+
         public async Task<bool> ValidateUserCredentialsAsync(string email, string password)
         {
             var user =  await _context.Users.FirstOrDefaultAsync(u => u!.Email == email);

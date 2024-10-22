@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiGateWay_OCSS.Application
 {
-    [Route("api/[controller]/[action]")]
+    [Route("ApiGateWay/Account/[action]")]
     [ApiController]
     public class AccountController(IUserRepository userRepository) : ControllerBase
     {

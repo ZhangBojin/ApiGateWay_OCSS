@@ -5,6 +5,7 @@ namespace ApiGateWay_OCSS.Domain.IRepositories
     public interface IUserRepository
     {
         Task<bool> AddAsync(Users user);
+        Task<Users?> GetByEmail(string email);
         Task<bool> ValidateUserCredentialsAsync(string email, string password);
         Task DeleteAsync();
         Task UpdateAsync();
