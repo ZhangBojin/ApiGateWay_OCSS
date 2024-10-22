@@ -12,7 +12,7 @@ namespace ApiGateWay_OCSS.Infrastructure.Repositories
          
         public async Task<bool> AddAsync(Users user)
         {
-            if(await _context.Users.FirstOrDefaultAsync(u => u!.Email == user.Email) != null) return false;
+            if(await _context.Users.AnyAsync(u => u!.Email == user.Email)) return false;
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             user.CreationTime=DateTime.Now;
             await _context.Users.AddAsync(user);

@@ -12,7 +12,7 @@ namespace ApiGateWay_OCSS.Infrastructure.Repositories
 
         public async Task<bool> AddAsync(string role)
         {
-            if (await _context.Roles.FirstOrDefaultAsync(u => u!.RoleName == role) != null) return false;
+            if (await _context.Roles.AnyAsync(u => u.RoleName == role)) return false;
             await _context.AddAsync(new Roles()
             {
                 RoleName = role,
