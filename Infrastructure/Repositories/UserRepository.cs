@@ -37,20 +37,6 @@ namespace ApiGateWay_OCSS.Infrastructure.Repositories
             return user != null && VerifyPassword(password, user.Password);
         }
 
-        public Task DeleteAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task SelectAllAsync()
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task SaveChangesAsync()
         {
