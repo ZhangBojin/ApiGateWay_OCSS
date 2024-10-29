@@ -9,7 +9,6 @@ namespace ApiGateWay_OCSS.Domain.IRepositories
         Task<UserInfo?> GetByEmail(string email);
         Task<bool> ValidateUserCredentialsAsync(string email, string password);
         Task SaveChangesAsync();
-
         string GenerateToken(UserInfo users, string role);
     }
 }
