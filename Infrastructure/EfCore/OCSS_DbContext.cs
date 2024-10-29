@@ -12,6 +12,7 @@ namespace ApiGateWay_OCSS.Infrastructure.EfCore
         public DbSet<UserInfo> UserInfo { get; set; }
         public DbSet<Students> Students { get; set; }
         public DbSet<Teachers> Teachers { get; set; }
+        public DbSet<MenuInfo> MenuInfo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,7 +35,7 @@ namespace ApiGateWay_OCSS.Infrastructure.EfCore
                     .ValueGeneratedNever(); // 确保不自增长
 
                 // 设置 UserId 为外键，且唯一
-                entity.HasOne<Users>() // 假设 User 是你的用户实体
+                entity.HasOne<Users>() //  User 是你的用户实体
                     .WithOne() // 一个用户对应一个学生
                     .HasForeignKey<Students>(e => e.UserId)
                     .OnDelete(DeleteBehavior.Cascade); // 级联删除
@@ -55,6 +56,14 @@ namespace ApiGateWay_OCSS.Infrastructure.EfCore
                     .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasIndex(e => e.UserId).IsUnique();
+            });
+
+            modelBuilder.Entity<MenuInfo>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne<Roles>() 
+                    .WithMany() 
+                    .HasForeignKey(e => e.RoleId);
             });
         }
     }

@@ -30,7 +30,6 @@ builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 #region 配置Jwt
 builder.Services.AddAuthentication(opt =>
 {
-    //指定默认的身份验证方案
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     //当默认的身份验证方案失败时，应用将使用这个方案发起挑战
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
