@@ -7,9 +7,11 @@ namespace ApiGateWay_OCSS.Application
 {
     [Route("ApiGateWay/Account/[action]")]
     [ApiController]
-    public class AccountController(IUserRepository userRepository) : ControllerBase
+    public class AccountController(IUserRepository userRepository, IMenuInfoRepository menuInfoRepository, IRoleRepository roleRepository) : ControllerBase
     {
         private readonly IUserRepository _userRepository = userRepository;
+        private readonly IMenuInfoRepository _menuInfoRepository= menuInfoRepository;
+        private readonly IRoleRepository _roleRepository = roleRepository;
 
         [HttpPost]
         public async Task<ActionResult> Register(AccountDto accountDto)
@@ -40,17 +42,33 @@ namespace ApiGateWay_OCSS.Application
             try
             {
                 var user = await _userRepository.GetByEmail(loginDto.Email);
-                if (user == null) throw new Exception("用户不存在！");
-                if (!await _userRepository.ValidateUserCredentialsAsync(user.Email, loginDto.Password))
-                    throw new Exception("密码错误！");
-                var token= _userRepository.GenerateToken(user, user.RoleName);
-                return Ok($"{token}");
+                if (user == null)
+                {
+                    return NotFound("用户不存在！");
+                }
+
+                var isValidCredentials = await _userRepository.ValidateUserCredentialsAsync(user.Email, loginDto.Password);
+                if (!isValidCredentials)
+                {
+                    return Unauthorized("密码错误！");
+                }
+
+                var token = _userRepository.GenerateToken(user, user.RoleName);
+                var roleId =  _roleRepository.GetRoleId(user.RoleName);
+                var menu = await _menuInfoRepository.GetMenu(roleId);
+
+                return Ok(new
+                {
+                    token = token,
+                    menu = menu
+                });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return StatusCode(500, e.Message);
+                return StatusCode(500, "服务器内部错误，请稍后再试。");
             }
         }
+
 
         #region test
         //[Authorize(Roles = "管理员")]

@@ -23,6 +23,9 @@ builder.Services.AddDbContext<OCSS_DbContext>(opt =>
 
 #region ²Ö´¢·şÎñ×¢Èë
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IMenuInfoRepository, MenuInfoRepository>();
+
 #endregion 
 
 #region ÅäÖÃJwt
