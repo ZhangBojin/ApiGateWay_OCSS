@@ -8,8 +8,8 @@
         public required string Msg { get; set; }
         public required string Controller { get; set; }
         public required string Action { get; set; }
-        public int UserId { get; set; }
-        public required string UserName { get; set; }
-        public required string UserEmail { get; set; }
+        public int? UserId { get; set; }
+        public  string? UserName { get; set; }
+        public  string? UserEmail { get; set; }
     }
 }

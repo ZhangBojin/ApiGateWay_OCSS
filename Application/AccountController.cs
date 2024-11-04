@@ -44,7 +44,7 @@ namespace ApiGateWay_OCSS.Application
         [HttpPost]
         public async Task<ActionResult> Login(LoginDto loginDto)
         {
-            _mqProducer.Log()
+           
             try
             {
                 var user = await _userRepository.GetByEmail(loginDto.Email);
