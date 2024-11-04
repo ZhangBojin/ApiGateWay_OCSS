@@ -2,16 +2,21 @@
 using ApiGateWay_OCSS.Domain.IRepositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
+using ApiGateWay_OCSS.Infrastructure.EfCore;
+using ApiGateWay_OCSS.Infrastructure.RabbitMq;
 
 namespace ApiGateWay_OCSS.Application
 {
     [Route("ApiGateWay/Account/[action]")]
     [ApiController]
-    public class AccountController(IUserRepository userRepository, IMenuInfoRepository menuInfoRepository, IRoleRepository roleRepository) : ControllerBase
+    public class AccountController(IUserRepository userRepository, IMenuInfoRepository menuInfoRepository
+                                    , IRoleRepository roleRepository,
+                                    RabbitMqProducer mqProducer) : ControllerBase
     {
         private readonly IUserRepository _userRepository = userRepository;
         private readonly IMenuInfoRepository _menuInfoRepository= menuInfoRepository;
         private readonly IRoleRepository _roleRepository = roleRepository;
+        private readonly RabbitMqProducer _mqProducer = mqProducer;
 
         [HttpPost]
         public async Task<ActionResult> Register(AccountDto accountDto)
@@ -39,6 +44,7 @@ namespace ApiGateWay_OCSS.Application
         [HttpPost]
         public async Task<ActionResult> Login(LoginDto loginDto)
         {
+            _mqProducer.Log()
             try
             {
                 var user = await _userRepository.GetByEmail(loginDto.Email);

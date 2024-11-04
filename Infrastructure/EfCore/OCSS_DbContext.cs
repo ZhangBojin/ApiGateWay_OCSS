@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiGateWay_OCSS.Infrastructure.EfCore
 {
-    public class OCSS_DbContext(DbContextOptions options) : DbContext(options)
+    public class OCSS_DbContext(DbContextOptions<OCSS_DbContext> options) : DbContext(options)
     {
         public DbSet<Users?> Users { get; set; }
         public DbSet<Roles> Roles { get; set; }

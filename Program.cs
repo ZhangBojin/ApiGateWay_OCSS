@@ -1,5 +1,6 @@
 using ApiGateWay_OCSS.Domain.IRepositories;
 using ApiGateWay_OCSS.Infrastructure.EfCore;
+using ApiGateWay_OCSS.Infrastructure.RabbitMq;
 using ApiGateWay_OCSS.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -19,13 +20,16 @@ builder.Services.AddDbContext<OCSS_DbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddDbContext<LogServiceDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("LogServiceConn"));
+});
 #endregion
 
 #region 仓储服务注入
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IMenuInfoRepository, MenuInfoRepository>();
-
 #endregion 
 
 #region 配置Jwt
@@ -49,6 +53,10 @@ builder.Services.AddAuthentication(opt =>
                 Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JwtSettings")["SecretKey"]!))
     };
 });
+#endregion
+
+#region 配置日志消息队列
+builder.Services.AddScoped<RabbitMqProducer>();
 #endregion
 
 var app = builder.Build();

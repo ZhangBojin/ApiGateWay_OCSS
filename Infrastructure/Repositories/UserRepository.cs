@@ -55,6 +55,8 @@ namespace ApiGateWay_OCSS.Infrastructure.Repositories
             var expiryInMinutes = int.Parse(_configuration.GetSection("JwtSettings")["TokenExpiryInMinutes"]!);
             var claims = new[]
             {
+                //ClaimTypes.NameIdentifier 用于表示用户的唯一标识符
+                new Claim(ClaimTypes.NameIdentifier,users.Id.ToString()),
                 new Claim(ClaimTypes.Name, users.Name),
                 new Claim(ClaimTypes.Email,users.Email),
                 new Claim(ClaimTypes.Role,role)
@@ -78,9 +80,10 @@ namespace ApiGateWay_OCSS.Infrastructure.Repositories
     //用户角色视图
     public class UserInfo
     {
+        public required int Id { get; set; }
         public required string Name { get; set; }
         public required string Email { get; set; }
-        public required string Password { get; set; }
+        public  string? Password { get; set; }
         public required string RoleName { get; set; }
 
     }
