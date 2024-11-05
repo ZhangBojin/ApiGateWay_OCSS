@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.RegularExpressions;
 using ApiGateWay_OCSS.Infrastructure.EfCore;
 using ApiGateWay_OCSS.Infrastructure.RabbitMq;
+using ApiGateWay_OCSS.Infrastructure.Repositories;
 
 namespace ApiGateWay_OCSS.Application
 {
@@ -83,6 +84,13 @@ namespace ApiGateWay_OCSS.Application
         //{
         //    return Ok();
         //}
+
+        [HttpPost]
+        public ActionResult LogTest()
+        {
+            _mqProducer.Log(new UserInfo(), "AccountController", "action","测试","Info");
+            return Ok();
+        }
         #endregion
     }
 

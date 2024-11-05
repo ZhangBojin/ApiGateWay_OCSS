@@ -18,7 +18,9 @@ namespace ApiGateWay_OCSS.Infrastructure.RabbitMq
             var factory = new ConnectionFactory()
             {
                 HostName = configuration.GetSection("RabbitMq")["HostName"],
-                Port = Convert.ToInt32(configuration.GetSection("RabbitMq")["Port"])
+                Port = Convert.ToInt32(configuration.GetSection("RabbitMq")["Port"]),
+                UserName = configuration.GetSection("RabbitMq")["Username"],
+                Password = configuration.GetSection("RabbitMq")["Password"]
             }; 
             var connection = factory.CreateConnection();
             _channel = connection.CreateModel();
@@ -30,7 +32,7 @@ namespace ApiGateWay_OCSS.Infrastructure.RabbitMq
                 arguments: null);
         }
 
-        public void Log(UserInfo userInfo,string controller,string action,string msg,string level)
+        public void Log(UserInfo? userInfo,string controller,string action,string msg,string level)
         {
             var log = new Log()
             {
