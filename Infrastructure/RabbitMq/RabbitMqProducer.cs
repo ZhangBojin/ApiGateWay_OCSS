@@ -1,17 +1,16 @@
-﻿using System.Text;
-using ApiGateWay_OCSS.Domain;
-using ApiGateWay_OCSS.Domain.Entities;
+﻿using ApiGateWay_OCSS.Domain.Entities;
 using ApiGateWay_OCSS.Infrastructure.EfCore;
 using ApiGateWay_OCSS.Infrastructure.Repositories;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
+using System.Text;
 
 namespace ApiGateWay_OCSS.Infrastructure.RabbitMq
 {
     public class RabbitMqProducer
     {
         private readonly IModel _channel;
+        private readonly IConnection _connection;
 
         public RabbitMqProducer(IConfiguration configuration, LogServiceDbContext logServiceDbContext)
         {
@@ -22,14 +21,19 @@ namespace ApiGateWay_OCSS.Infrastructure.RabbitMq
                 UserName = configuration.GetSection("RabbitMq")["Username"],
                 Password = configuration.GetSection("RabbitMq")["Password"]
             }; 
-            var connection = factory.CreateConnection();
-            _channel = connection.CreateModel();
+             _connection = factory.CreateConnection();
+            _channel = _connection.CreateModel();
 
             _channel.QueueDeclare(queue: "Logs",
                 durable: false,
                 exclusive: false,
                 autoDelete: false,
                 arguments: null);
+        }
+        ~RabbitMqProducer()
+        {
+            _channel.Close();
+            _connection.Close();
         }
 
         public void Log(UserInfo? userInfo,string controller,string action,string msg,string level)
