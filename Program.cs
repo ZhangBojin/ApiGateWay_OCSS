@@ -5,6 +5,7 @@ using ApiGateWay_OCSS.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -56,7 +57,15 @@ builder.Services.AddAuthentication(opt =>
 #endregion
 
 #region 配置日志消息队列
-builder.Services.AddScoped<RabbitMqProducer>();
+    builder.Services.AddScoped<RabbitMqProducer>();
+#endregion
+
+#region Redis配置
+    builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
+    {
+        var configuration = builder.Configuration.GetSection("Redis:Configuration").Value;
+        return ConnectionMultiplexer.Connect(configuration!);
+    });
 #endregion
 
 var app = builder.Build();

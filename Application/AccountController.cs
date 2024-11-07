@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using ApiGateWay_OCSS.Infrastructure.EfCore;
 using ApiGateWay_OCSS.Infrastructure.RabbitMq;
 using ApiGateWay_OCSS.Infrastructure.Repositories;
+using StackExchange.Redis;
 
 namespace ApiGateWay_OCSS.Application
 {
@@ -12,12 +13,14 @@ namespace ApiGateWay_OCSS.Application
     [ApiController]
     public class AccountController(IUserRepository userRepository, IMenuInfoRepository menuInfoRepository
                                     , IRoleRepository roleRepository,
-                                    RabbitMqProducer mqProducer) : ControllerBase
+                                    RabbitMqProducer mqProducer,
+                                    IConnectionMultiplexer connectionMultiplexer) : ControllerBase
     {
         private readonly IUserRepository _userRepository = userRepository;
         private readonly IMenuInfoRepository _menuInfoRepository= menuInfoRepository;
         private readonly IRoleRepository _roleRepository = roleRepository;
         private readonly RabbitMqProducer _mqProducer = mqProducer;
+        private readonly IConnectionMultiplexer _connectionMultiplexer = connectionMultiplexer;
 
         [HttpPost]
         public async Task<ActionResult> Register(AccountDto accountDto)
@@ -65,6 +68,7 @@ namespace ApiGateWay_OCSS.Application
                 var roleId =  _roleRepository.GetRoleId(user.RoleName!);
                 var menu = await _menuInfoRepository.GetMenu(roleId);
 
+                               
                 return Ok(new
                 {
                     token = token,
@@ -93,6 +97,13 @@ namespace ApiGateWay_OCSS.Application
         //    _mqProducer.Log(new UserInfo(), "AccountController", "action","测试","Info");
         //    return Ok();
         //}
+        [HttpPost]
+        public ActionResult RedisTest()
+        {
+            var dbRedis = _connectionMultiplexer.GetDatabase(5);
+            dbRedis.StringSet("key", "张伯晋", new TimeSpan( 0,0, 10));
+            return Ok();
+        }
         #endregion
     }
 
