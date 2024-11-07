@@ -45,7 +45,7 @@ namespace ApiGateWay_OCSS.Application
         [HttpPost]
         public async Task<ActionResult> Login(LoginDto loginDto)
         {
-            _mqProducer.Log(new UserInfo(), "AccountController", "action", "接口被调用！", "Info");
+            _mqProducer.Log(new UserInfo(), "AccountController", "Login", "接口被调用！", "Info");
 
             try
             {
@@ -55,14 +55,14 @@ namespace ApiGateWay_OCSS.Application
                     return NotFound("用户不存在！");
                 }
 
-                var isValidCredentials = await _userRepository.ValidateUserCredentialsAsync(user.Email, loginDto.Password);
+                var isValidCredentials = await _userRepository.ValidateUserCredentialsAsync(user.Email!, loginDto.Password);
                 if (!isValidCredentials)
                 {
                     return Unauthorized("密码错误！");
                 }
 
-                var token = _userRepository.GenerateToken(user, user.RoleName);
-                var roleId =  _roleRepository.GetRoleId(user.RoleName);
+                var token = _userRepository.GenerateToken(user, user.RoleName!);
+                var roleId =  _roleRepository.GetRoleId(user.RoleName!);
                 var menu = await _menuInfoRepository.GetMenu(roleId);
 
                 return Ok(new
