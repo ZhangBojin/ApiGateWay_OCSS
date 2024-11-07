@@ -64,7 +64,9 @@ namespace ApiGateWay_OCSS.Application
                 }
 
                 var redis = _connectionMultiplexer.GetDatabase(0);
-                await redis.StringSetAsync(user.Email!.ToString(), user.Name!.ToString(), new TimeSpan(0, 3, 0));
+
+                await redis.StringSetAsync(user.Email!.ToString(), user.Name!.ToString(), TimeSpan.FromMinutes(3));
+
                 var token = _userRepository.GenerateToken(user, user.RoleName!);
                 var roleId =  _roleRepository.GetRoleId(user.RoleName!);
                 var menu = await _menuInfoRepository.GetMenu(roleId);
