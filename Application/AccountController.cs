@@ -1,11 +1,10 @@
 ﻿using ApiGateWay_OCSS.Domain.Entities;
 using ApiGateWay_OCSS.Domain.IRepositories;
-using Microsoft.AspNetCore.Mvc;
-using System.Text.RegularExpressions;
-using ApiGateWay_OCSS.Infrastructure.EfCore;
 using ApiGateWay_OCSS.Infrastructure.RabbitMq;
 using ApiGateWay_OCSS.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using StackExchange.Redis;
+using System.Text.RegularExpressions;
 
 namespace ApiGateWay_OCSS.Application
 {
@@ -64,6 +63,8 @@ namespace ApiGateWay_OCSS.Application
                     return Unauthorized("密码错误！");
                 }
 
+                var redis = _connectionMultiplexer.GetDatabase(0);
+                await redis.StringSetAsync(user.Email!.ToString(), user.Name!.ToString(), new TimeSpan(0, 3, 0));
                 var token = _userRepository.GenerateToken(user, user.RoleName!);
                 var roleId =  _roleRepository.GetRoleId(user.RoleName!);
                 var menu = await _menuInfoRepository.GetMenu(roleId);
@@ -97,13 +98,13 @@ namespace ApiGateWay_OCSS.Application
         //    _mqProducer.Log(new UserInfo(), "AccountController", "action","测试","Info");
         //    return Ok();
         //}
-        [HttpPost]
-        public ActionResult RedisTest()
-        {
-            var dbRedis = _connectionMultiplexer.GetDatabase(5);
-            dbRedis.StringSet("key", "张伯晋", new TimeSpan( 0,0, 10));
-            return Ok();
-        }
+        //[HttpPost]
+        //public ActionResult RedisTest()
+        //{
+        //    var dbRedis = _connectionMultiplexer.GetDatabase(5);
+        //    dbRedis.StringSet("key", "测试", new TimeSpan( 0,0, 10));
+        //    return Ok();
+        //}
         #endregion
     }
 
