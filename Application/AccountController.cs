@@ -45,7 +45,8 @@ namespace ApiGateWay_OCSS.Application
         [HttpPost]
         public async Task<ActionResult> Login(LoginDto loginDto)
         {
-           
+            _mqProducer.Log(new UserInfo(), "AccountController", "action", "接口被调用！", "Info");
+
             try
             {
                 var user = await _userRepository.GetByEmail(loginDto.Email);
@@ -72,6 +73,7 @@ namespace ApiGateWay_OCSS.Application
             }
             catch (Exception ex)
             {
+                _mqProducer.Log(new UserInfo(), "AccountController", "action", $"接口抛出异常：{ex.Message}", "warning");
                 return StatusCode(500, "服务器内部错误，请稍后再试。");
             }
         }
@@ -85,12 +87,12 @@ namespace ApiGateWay_OCSS.Application
         //    return Ok();
         //}
 
-        [HttpPost]
-        public ActionResult LogTest()
-        {
-            _mqProducer.Log(new UserInfo(), "AccountController", "action","测试","Info");
-            return Ok();
-        }
+        //[HttpPost]
+        //public ActionResult LogTest()
+        //{
+        //    _mqProducer.Log(new UserInfo(), "AccountController", "action","测试","Info");
+        //    return Ok();
+        //}
         #endregion
     }
 

@@ -80,7 +80,7 @@ namespace ApiGateWay_OCSS.Infrastructure.Repositories
     //用户角色视图
     public class UserInfo
     {
-        public  int Id { get; set; }
+        public  int? Id { get; set; }
         public  string? Name { get; set; }
         public  string? Email { get; set; }
         public  string? Password { get; set; }

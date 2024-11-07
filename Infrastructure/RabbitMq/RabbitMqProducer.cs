@@ -45,7 +45,7 @@ namespace ApiGateWay_OCSS.Infrastructure.RabbitMq
                 Msg= msg,
                 Controller= controller,
                 Action= action,
-                UserId=userInfo.Id,
+                UserId = userInfo!.Id,
                 UserName=userInfo.Name,
                 UserEmail=userInfo.Email,
             };
