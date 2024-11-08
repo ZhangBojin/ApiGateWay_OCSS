@@ -57,7 +57,7 @@ builder.Services.AddAuthentication(opt =>
 #endregion
 
 #region 配置日志消息队列
-    builder.Services.AddScoped<RabbitMqProducer>();
+    builder.Services.AddSingleton<RabbitMqProducer>();
 #endregion
 
 #region Redis配置

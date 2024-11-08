@@ -12,7 +12,7 @@ namespace ApiGateWay_OCSS.Infrastructure.RabbitMq
         private readonly IModel _channel;
         private readonly IConnection _connection;
 
-        public RabbitMqProducer(IConfiguration configuration, LogServiceDbContext logServiceDbContext)
+        public RabbitMqProducer(IConfiguration configuration)
         {
             var factory = new ConnectionFactory()
             {
