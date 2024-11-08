@@ -31,7 +31,8 @@ namespace ApiGateWay_OCSS.Application
             {
                 redis.KeyExpire(emailAddress, TimeSpan.FromMinutes(3));
                 var total=await redis.ExecuteAsync("DBSIZE");
-                return Ok(Convert.ToInt32(total));
+                var result = Convert.ToInt32(total);
+                return Ok(result);
             }
             else
             {
@@ -40,7 +41,8 @@ namespace ApiGateWay_OCSS.Application
 
                 await redis.StringSetAsync(emailAddress, name, TimeSpan.FromMinutes(3));
                 var total =await redis.ExecuteAsync("DBSIZE");
-                return Ok(Convert.ToInt32(total));
+                var result = Convert.ToInt32(total);
+                return Ok(result);
             }
         }
     }
