@@ -2,6 +2,7 @@ using ApiGateWay_OCSS.Domain.IRepositories;
 using ApiGateWay_OCSS.Infrastructure.EfCore;
 using ApiGateWay_OCSS.Infrastructure.RabbitMq;
 using ApiGateWay_OCSS.Infrastructure.Repositories;
+using Consul;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -65,6 +66,16 @@ builder.Services.AddAuthentication(opt =>
     {
         var configuration = builder.Configuration.GetSection("Redis:Configuration").Value;
         return ConnectionMultiplexer.Connect(configuration!);
+    });
+#endregion
+
+#region ≈‰÷√Consul
+    builder.Services.AddSingleton<IConsulClient, ConsulClient>(client =>
+    {
+        return new ConsulClient(config =>
+        {
+            config.Address = new Uri(builder.Configuration.GetSection("Consul")["Address"]!); // Consul serverµÿ÷∑
+        });
     });
 #endregion
 
