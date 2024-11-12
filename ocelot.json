@@ -11,6 +11,7 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/Test",
+      "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/oc",
       "UpstreamHttpMethod": [ "POST" ],
       "ServiceName": "AdminManagement",
@@ -39,4 +40,3 @@
 //    "BaseUrl": "https://localhost:7777"
 //  }
 //}
-
