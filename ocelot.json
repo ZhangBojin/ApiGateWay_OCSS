@@ -1,42 +1,18 @@
 {
-  "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:7777",
-    "ServiceDiscoveryProvider": {
-      "Host": "4f927494.r1.cpolar.top",
-      "Port": 80,
-      "Type": "Consul",
-      "Scheme": "http"
-    }
-  },
   "Routes": [
     {
       "DownstreamPathTemplate": "/Test",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/oc",
-      "UpstreamHttpMethod": [ "POST" ],
       "ServiceName": "AdminManagement",
-      "ReRouteIsCaseSensitive": false,
-      "UseServiceDiscovery": true
-    }
-  ]
-}
+      "UpstreamHttpMethod": [ "Post" ]
 
-//{
-//  "Routes": [
-//    {
-//      "DownstreamPathTemplate": "/Test",
-//      "DownstreamScheme": "http",
-//      "DownstreamHostAndPorts": [
-//        {
-//          "Host": "409ebc78.r22.cpolar.top",
-//          "Port": 80
-//        }
-//      ],
-//      "UpstreamPathTemplate": "/oc",
-//      "UpstreamHttpMethod": [ "Post" ]
-//    }
-//  ],
-//  "GlobalConfiguration": {
-//    "BaseUrl": "https://localhost:7777"
-//  }
-//}
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:7777",
+    "ServiceDiscoveryProvider": {
+      "Type": "MyServiceDiscoveryProvider"
+    }
+  }
+}

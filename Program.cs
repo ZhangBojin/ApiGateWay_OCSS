@@ -1,5 +1,6 @@
 using ApiGateWay_OCSS.Domain.IRepositories;
 using ApiGateWay_OCSS.Infrastructure.EfCore;
+using ApiGateWay_OCSS.Infrastructure.Ocelot;
 using ApiGateWay_OCSS.Infrastructure.RabbitMq;
 using ApiGateWay_OCSS.Infrastructure.Repositories;
 using Consul;
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using Ocelot.Provider.Consul;
+using Ocelot.ServiceDiscovery;
 using StackExchange.Redis;
 using System.Text;
 
@@ -23,7 +24,12 @@ builder.Services.AddSwaggerGen();
 //加载名为 ocelot 的配置文件
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 
-builder.Services.AddOcelot().AddConsul(); 
+
+ServiceDiscoveryFinderDelegate serviceDiscoveryFinder = (provider, config, route) => new MyServiceDiscoveryProvider(route);
+builder.Services.AddSingleton(serviceDiscoveryFinder);
+builder.Services.AddOcelot(); 
+
+
 
 
 #region 数据库上下文scoped注入
