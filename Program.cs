@@ -21,16 +21,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+#region ocelot 配置
 //加载名为 ocelot 的配置文件
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 
-
+//注册ServiceDiscoveryFinderDelegate 以初始化并返回提供程序
 ServiceDiscoveryFinderDelegate serviceDiscoveryFinder = (provider, config, route) => new MyServiceDiscoveryProvider(route);
 builder.Services.AddSingleton(serviceDiscoveryFinder);
-builder.Services.AddOcelot(); 
-
-
-
+builder.Services.AddOcelot();
+#endregion
 
 #region 数据库上下文scoped注入
 builder.Services.AddDbContext<OCSS_DbContext>(opt =>
