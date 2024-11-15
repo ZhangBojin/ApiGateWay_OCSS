@@ -1,13 +1,89 @@
 {
   "Routes": [
+    //——————————————————————————————————
     {
-      "DownstreamPathTemplate": "/Test",
+      "DownstreamPathTemplate": "/api/Students/DownloadTemplate",
       "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/oc",
+      "UpstreamPathTemplate": "/api/Students/DownloadTemplate",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Get" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/Students/UploadExcel",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Students/UploadExcel",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/Students/GetStudents",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Students/GetStudents",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/Students/EditStudents",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Students/EditStudents",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/Students/DeleteStudents",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Students/DeleteStudents",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+
+    },
+    //——————————————————————————————————
+    {
+      "DownstreamPathTemplate": "/api/Teachers/DownloadTemplate",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Teachers/DownloadTemplate",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Get" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/Teachers/UploadExcel",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Teachers/UploadExcel",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/Teachers/GetTeachers",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Teachers/GetTeachers",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/Teachers/EditTeachers",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Teachers/EditTeachers",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+
+    },
+    {
+      "DownstreamPathTemplate": "/api/Teachers/DeleteTeachers",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Teachers/DeleteTeachers",
       "ServiceName": "AdminManagement",
       "UpstreamHttpMethod": [ "Post" ]
 
     }
+    //——————————————————————————————————
+
   ],
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:7777",

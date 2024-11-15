@@ -26,7 +26,7 @@ builder.Services.AddSwaggerGen();
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 
 //注册ServiceDiscoveryFinderDelegate 以初始化并返回提供程序
-ServiceDiscoveryFinderDelegate serviceDiscoveryFinder = (provider, config, route) => new MyServiceDiscoveryProvider(route);
+ServiceDiscoveryFinderDelegate serviceDiscoveryFinder = (provider, config, route) => new MyServiceDiscoveryProvider(route, provider.GetRequiredService<IConfiguration>());
 builder.Services.AddSingleton(serviceDiscoveryFinder);
 builder.Services.AddOcelot();
 #endregion
