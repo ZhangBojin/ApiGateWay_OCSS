@@ -104,9 +104,23 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
+
+app.UseRouting();
+
 app.UseAuthorization();
 
-app.MapControllers();
+// 配置指定路径直接通过 ASP.NET Core 处理
+app.UseEndpoints(endpoints =>
+{
+    // 直接映射到 ASP.NET Core 控制器
+    _ = endpoints.MapControllerRoute(
+        name: "localApi",
+        pattern: "ApiGateWay/Account/Register");
+
+    _ = endpoints.MapControllerRoute(
+        name: "localApi",
+        pattern: "api/Heartbeat/OnlineHeartbeat");
+});
 
 app.UseOcelot().Wait();
 
