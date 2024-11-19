@@ -82,8 +82,41 @@
       "ServiceName": "AdminManagement",
       "UpstreamHttpMethod": [ "Post" ]
 
+    },
+    //——————————————————————————————————
+    {
+      "DownstreamPathTemplate": "/api/Menu/UpdMenuById",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Menu/UpdMenuById",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Menu/GetMenuList",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Menu/GetMenuList",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Menu/DelMenuById",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Menu/DelMenuById",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Menu/AddMenu",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Menu/AddMenu",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
     }
     //——————————————————————————————————
+
     //===============================================================================================================
   ],
   "GlobalConfiguration": {
