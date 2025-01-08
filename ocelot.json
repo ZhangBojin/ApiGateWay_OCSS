@@ -114,9 +114,15 @@
       "UpstreamPathTemplate": "/api/Menu/AddMenu",
       "ServiceName": "AdminManagement",
       "UpstreamHttpMethod": [ "Post" ]
-    }
+    },
     //——————————————————————————————————
-
+    {
+      "DownstreamPathTemplate": "/api/Course/PaginationList",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Course/PaginationList",
+      "ServiceName": "CourseServices",
+      "UpstreamHttpMethod": [ "Post" ]
+    }
     //===============================================================================================================
   ],
   "GlobalConfiguration": {
