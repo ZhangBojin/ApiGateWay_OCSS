@@ -122,6 +122,34 @@
       "UpstreamPathTemplate": "/api/Course/PaginationList",
       "ServiceName": "CourseServices",
       "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Teachers/IsExist",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Teachers/IsExist",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Course/DesignatedTeacher",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Course/DesignatedTeacher",
+      "ServiceName": "CourseServices",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Course/AddCourse",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Course/AddCourse",
+      "ServiceName": "CourseServices",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Course/DelCourse",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Course/DelCourse",
+      "ServiceName": "CourseServices",
+      "UpstreamHttpMethod": [ "Post" ]
     }
     //===============================================================================================================
   ],
