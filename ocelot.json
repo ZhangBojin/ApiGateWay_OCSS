@@ -150,6 +150,31 @@
       "UpstreamPathTemplate": "/api/Course/DelCourse",
       "ServiceName": "CourseServices",
       "UpstreamHttpMethod": [ "Post" ]
+    },
+    //===============================================================================================================
+
+    // Teacher =========================================================================================================
+
+    {
+      "DownstreamPathTemplate": "/api/Teachers/GetTeacherInfo",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Teachers/GetTeacherInfo",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Course/CoursesUnderTeachers",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Course/CoursesUnderTeachers",
+      "ServiceName": "CourseServices",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Teachers/GetTeacherSelfInfo",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Teachers/GetTeacherSelfInfo",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
     }
     //===============================================================================================================
   ],
