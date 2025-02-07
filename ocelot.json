@@ -175,11 +175,33 @@
       "UpstreamPathTemplate": "/api/Teachers/GetTeacherSelfInfo",
       "ServiceName": "AdminManagement",
       "UpstreamHttpMethod": [ "Post" ]
-    }
+    },
     //===============================================================================================================
     // Student =========================================================================================================
 
-    
+    {
+      "DownstreamPathTemplate": "/api/Students/GetStudentInfo",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Students/GetStudentInfo",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/CourseSelection/GetMyCourse",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/CourseSelection/GetMyCourse",
+      "ServiceName": "CourseSelectionService01",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    //——————————————————————————————————
+    {
+      "DownstreamPathTemplate": "/api/CourseSelection/SelectConfirm",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/CourseSelection/SelectConfirm",
+      "ServiceName": "CourseSelectionService01",
+      "UpstreamHttpMethod": [ "Post" ]
+    }
+
     //===============================================================================================================
 
 
