@@ -175,17 +175,11 @@
       "UpstreamPathTemplate": "/api/Teachers/GetTeacherSelfInfo",
       "ServiceName": "AdminManagement",
       "UpstreamHttpMethod": [ "Post" ]
-    },
+    }
     //===============================================================================================================
     // Student =========================================================================================================
 
-    {
-      "DownstreamPathTemplate": "/api/Course/SelectConfirmMq",
-      "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/api/Course/SelectConfirmMq",
-      "ServiceName": "CourseServices",
-      "UpstreamHttpMethod": [ "Post" ]
-    }
+    
     //===============================================================================================================
 
 
