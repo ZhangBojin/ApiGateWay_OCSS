@@ -29,7 +29,7 @@ namespace ApiGateWay_OCSS.Application
 
             if (!tmp.IsNullOrEmpty)
             {
-                redis.KeyExpire(emailAddress, TimeSpan.FromMinutes(3));
+                redis.KeyExpire(emailAddress, TimeSpan.FromSeconds(30));
                 var total=await redis.ExecuteAsync("DBSIZE");
                 var result = Convert.ToInt32(total);
                 return Ok(result);
@@ -39,7 +39,7 @@ namespace ApiGateWay_OCSS.Application
                 var name = jsonToken.Claims.First(p =>
                     p.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name").Value;
 
-                await redis.StringSetAsync(emailAddress, name, TimeSpan.FromMinutes(3));
+                await redis.StringSetAsync(emailAddress, name, TimeSpan.FromSeconds(30));
                 var total =await redis.ExecuteAsync("DBSIZE");
                 var result = Convert.ToInt32(total);
                 return Ok(result);
