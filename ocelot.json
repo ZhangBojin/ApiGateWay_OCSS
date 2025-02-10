@@ -170,6 +170,21 @@
       "UpstreamHttpMethod": [ "Post" ]
     },
     {
+      "DownstreamPathTemplate": "/api/Students/GetStudentsInfo",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Students/GetStudentsInfo",
+      "ServiceName": "AdminManagement",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Course/GetStudentsInCoursesITeach",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Course/GetStudentsInCoursesITeach",
+      "ServiceName": "CourseServices",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+    {
       "DownstreamPathTemplate": "/api/Teachers/GetTeacherSelfInfo",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/Teachers/GetTeacherSelfInfo",
@@ -202,7 +217,7 @@
       "UpstreamHttpMethod": [ "Post" ]
     }
     //——————————————————————————————————
-    
+
 
     //===============================================================================================================
 
