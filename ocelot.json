@@ -42,7 +42,7 @@
       "UpstreamHttpMethod": [ "Post" ]
 
     },
-    //——————————————————————————————————
+    
     {
       "DownstreamPathTemplate": "/api/Teachers/DownloadTemplate",
       "DownstreamScheme": "http",
@@ -83,7 +83,7 @@
       "UpstreamHttpMethod": [ "Post" ]
 
     },
-    //——————————————————————————————————
+    
     {
       "DownstreamPathTemplate": "/api/Menu/UpdMenuById",
       "DownstreamScheme": "http",
@@ -115,7 +115,7 @@
       "ServiceName": "AdminManagement",
       "UpstreamHttpMethod": [ "Post" ]
     },
-    //——————————————————————————————————
+    
     {
       "DownstreamPathTemplate": "/api/Course/PaginationList",
       "DownstreamScheme": "http",
@@ -224,15 +224,21 @@
       "ServiceName": "CourseSelectionService01",
       "UpstreamHttpMethod": [ "Post" ]
     },
-    //——————————————————————————————————
+    
     {
       "DownstreamPathTemplate": "/api/CourseSelection/SelectConfirm",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/CourseSelection/SelectConfirm",
       "ServiceName": "CourseSelectionService01",
       "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Course/GetMyCourseId",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Course/GetMyCourseId",
+      "ServiceName": "CourseServices",
+      "UpstreamHttpMethod": [ "Post" ]
     }
-    //——————————————————————————————————
 
 
     //===============================================================================================================
