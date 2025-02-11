@@ -191,6 +191,22 @@
       "ServiceName": "AdminManagement",
       "UpstreamHttpMethod": [ "Post" ]
     },
+
+    {
+      "DownstreamPathTemplate": "/api/Course/GetCourseInfo",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Course/GetCourseInfo",
+      "ServiceName": "CourseServices",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/Course/UpdCourseGrade",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Course/UpdCourseGrade",
+      "ServiceName": "CourseServices",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
     //===============================================================================================================
     // Student =========================================================================================================
 
