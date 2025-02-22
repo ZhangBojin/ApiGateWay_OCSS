@@ -15,7 +15,7 @@
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/Students/UploadExcel",
       "ServiceName": "AdminManagement",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": [ "Post", "OPTIONS" ]
 
     },
     {
@@ -56,7 +56,7 @@
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/Teachers/UploadExcel",
       "ServiceName": "AdminManagement",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": [ "Post", "OPTIONS" ]
 
     },
     {
