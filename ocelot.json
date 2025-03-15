@@ -42,7 +42,7 @@
       "UpstreamHttpMethod": [ "Post" ]
 
     },
-    
+
     {
       "DownstreamPathTemplate": "/api/Teachers/DownloadTemplate",
       "DownstreamScheme": "http",
@@ -83,7 +83,7 @@
       "UpstreamHttpMethod": [ "Post" ]
 
     },
-    
+
     {
       "DownstreamPathTemplate": "/api/Menu/UpdMenuById",
       "DownstreamScheme": "http",
@@ -115,7 +115,7 @@
       "ServiceName": "AdminManagement",
       "UpstreamHttpMethod": [ "Post" ]
     },
-    
+
     {
       "DownstreamPathTemplate": "/api/Course/PaginationList",
       "DownstreamScheme": "http",
@@ -221,16 +221,22 @@
       "DownstreamPathTemplate": "/api/CourseSelection/GetMyCourse",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/CourseSelection/GetMyCourse",
-      "ServiceName": "CourseSelectionService01",
-      "UpstreamHttpMethod": [ "Post" ]
+      "ServiceName": "CourseSelectionService",
+      "UpstreamHttpMethod": [ "Post" ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin" // 这里配置轮询负载均衡策略
+      }
     },
-    
+
     {
       "DownstreamPathTemplate": "/api/CourseSelection/SelectConfirm",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/CourseSelection/SelectConfirm",
-      "ServiceName": "CourseSelectionService01",
-      "UpstreamHttpMethod": [ "Post" ]
+      "ServiceName": "CourseSelectionService",
+      "UpstreamHttpMethod": [ "Post" ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin" // 这里配置轮询负载均衡策略
+      }
     },
     {
       "DownstreamPathTemplate": "/api/Course/GetMyCourseId",

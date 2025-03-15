@@ -21,12 +21,8 @@ public class MyServiceDiscoveryProvider(DownstreamRoute downstreamRoute, IConfig
             config.Address = new Uri($"{_configuration.GetSection("Consul")["Address"]}");
         });
 
-        var services = new List<Service>();
         var service = await consulClient.Catalog.Service(_downstreamRoute.ServiceName);
 
-        services.Add(new Service(service.Response[0].ServiceName, new ServiceHostAndPort(service.Response[0].ServiceAddress, service.Response[0].ServicePort),
-            service.Response[0].ServiceID, "null", service.Response[0].ServiceTags));
-
-        return services;
+        return service.Response.Select(entry => new Service(entry.ServiceName, new ServiceHostAndPort(entry.ServiceAddress, entry.ServicePort), entry.ServiceID, "null", entry.ServiceTags)).ToList();
     }
 }
