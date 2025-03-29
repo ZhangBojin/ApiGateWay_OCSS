@@ -93,7 +93,20 @@ builder.Services.AddAuthentication(opt =>
     });
 #endregion
 
+#region 配置跨域
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAny", policy =>
+    {
+        policy.AllowAnyOrigin()         // 允许任何来源
+            .AllowAnyHeader()          // 允许任何请求头
+            .AllowAnyMethod();         // 允许任何请求方法（GET、POST 等）
+    });
+});
+#endregion
+
 var app = builder.Build();
+
 
 if (app.Environment.IsDevelopment())
 {
@@ -106,7 +119,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseRouting();
-
+app.UseCors("AllowAny");  // 启用 CORS 策略
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
